@@ -1,0 +1,38 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Player : MonoBehaviour
+{
+    public static Player Instance { get; private set; }
+    public PlayerMovement playerMovement;
+    public Animator animator;
+
+    public void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            Instance = this;
+        }
+    }
+
+    public void Start()
+    {
+        playerMovement = GetComponent<PlayerMovement>();
+        animator = GameObject.Find("EngineEffect").GetComponent<Animator>();
+    }
+
+    public void FixedUpdate()
+    {
+        playerMovement.Move();
+    }
+
+    public void LateUpdate()
+    {
+        animator.SetBool("IsMoving", playerMovement.IsMoving());
+    }
+}
