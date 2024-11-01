@@ -39,16 +39,25 @@ public class PlayerMovement : MonoBehaviour
         {
             moveVelocity = Vector2.zero;
         }
-
-        if (moveDirection.magnitude == 0)
+        
+        Vector2 friction = GetFriction();
+          if (moveDirection.magnitude > 0)
         {
-            moveVelocity = Vector2.MoveTowards(moveVelocity, Vector2.zero, stopFriction.magnitude * Time.deltaTime);
+            moveVelocity -= friction * Time.deltaTime;
+            moveVelocity = Vector2.ClampMagnitude(moveVelocity, maxSpeed.magnitude);
+        }
+        else
+        {
+            moveVelocity = Vector2.MoveTowards(moveVelocity, Vector2.zero, friction.magnitude * Time.deltaTime);
         }
 
         if (moveVelocity.magnitude < stopClamp.magnitude)
         {
             moveVelocity = Vector2.zero;
         }
+
+        
+
 
         if (!float.IsNaN(moveVelocity.x) && !float.IsNaN(moveVelocity.y))
         {
@@ -58,6 +67,7 @@ public class PlayerMovement : MonoBehaviour
 
     public Vector2 GetFriction()
     {
+       
         return (moveDirection.magnitude > 0) ? moveFriction : stopFriction;
     }
 
