@@ -29,6 +29,7 @@ public class Player : MonoBehaviour
     public void FixedUpdate()
     {
         playerMovement.Move();
+        playerMovement.MoveBound();
     }
 
     public void LateUpdate()
