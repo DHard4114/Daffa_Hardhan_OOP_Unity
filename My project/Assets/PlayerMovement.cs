@@ -77,7 +77,6 @@ public class PlayerMovement : MonoBehaviour
     }
 
     public void MoveBound() {
-        // Membatasi posisi pesawat agar tidak keluar dari batas layar
         Vector3 clampedPosition = rb.position;
         clampedPosition.x = Mathf.Clamp(clampedPosition.x, xMin, xMax);
         clampedPosition.y = Mathf.Clamp(clampedPosition.y, yMin, yMax);

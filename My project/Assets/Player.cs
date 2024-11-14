@@ -7,7 +7,7 @@ public class Player : MonoBehaviour
     public static Player Instance { get; private set; }
     public PlayerMovement playerMovement;
     public Animator animator;
-
+    public bool IsWeapon;
     public void Awake()
     {
         if (Instance != null && Instance != this)
@@ -22,6 +22,7 @@ public class Player : MonoBehaviour
 
     public void Start()
     {
+        IsWeapon = false;
         playerMovement = GetComponent<PlayerMovement>();
         animator = GameObject.Find("EngineEffect").GetComponent<Animator>();
     }
