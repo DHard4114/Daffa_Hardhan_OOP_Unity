@@ -46,10 +46,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f18ff51873607f647b5c6b3144b1bfcc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shootIntervalInSeconds: 3
-  bulletPrefab: {fileID: 0}
-  bulletSpawnPoint: {fileID: 0}
   parentTransform: {fileID: 0}
+  weaponPickup: {fileID: 0}
+  shootIntervalInSeconds: 3
+  bullet: {fileID: 0}
+  bulletSpawnPoint: {fileID: 0}
 --- !u!212 &4785253372752910033
 SpriteRenderer:
   m_ObjectHideFlags: 0

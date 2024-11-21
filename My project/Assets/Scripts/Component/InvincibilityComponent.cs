@@ -1,52 +1,47 @@
 using System.Collections;
 using UnityEngine;
 
+[RequireComponent(typeof(SpriteRenderer)), RequireComponent(typeof(HitboxComponent))]
 public class InvincibilityComponent : MonoBehaviour
 {
-    [SerializeField] private int blinkingCount = 7; // Banyaknya kedipan
-    [SerializeField] private float blinkInterval = 0.1f; // Interval antar kedipan
-    [SerializeField] private Material blinkMaterial; // Material untuk efek blink
-    private SpriteRenderer spriteRenderer; // Untuk merubah tampilan sprite
-    private Material originalMaterial; // Material asli sebelum berkedip
-    public bool isInvincible = false; // Menandakan apakah objek kebal
+    [SerializeField] private int blinkingCount = 7;
+    [SerializeField] private float blinkInterval = 0.1f;
+    [SerializeField] private Material blinkMaterial;
 
+    private SpriteRenderer spriteRenderer;
+    private Material originalMaterial;
+
+    public bool isInvincible = false;
+
+    // Start is called before the first frame update
     private void Awake()
     {
-        // Mendapatkan referensi SpriteRenderer dan material asli
         spriteRenderer = GetComponent<SpriteRenderer>();
         originalMaterial = spriteRenderer.material;
     }
 
-    // Enumerator untuk efek blinking
-    private IEnumerator BlinkingEffect()
+    public void TriggerInvincibility()
     {
-        int blinkCount = 0;
-        while (blinkCount < blinkingCount)
+        if (!isInvincible)
         {
-            // Ganti dengan material blinking
+            StartCoroutine(InvincibilityCoroutine());
+        }
+    }
+
+    private IEnumerator InvincibilityCoroutine()
+    {
+        isInvincible = true;
+
+        for (int i = 0; i < blinkingCount; i++)
+        {
             spriteRenderer.material = blinkMaterial;
-            yield return new WaitForSeconds(blinkInterval);
-
-            // Kembali ke material asli
+            yield return new WaitForSeconds(blinkInterval / 2);
             spriteRenderer.material = originalMaterial;
-            yield return new WaitForSeconds(blinkInterval);
-
-            blinkCount++;
+            yield return new WaitForSeconds(blinkInterval / 2);
         }
-    }
 
-    // Fungsi untuk memulai blinking jika Entity tidak sedang invincible
-    public void StartBlinking()
-    {
-        if (!isInvincible) // Pastikan Entity tidak sedang invincible
-        {
-            StartCoroutine(BlinkingEffect());
-        }
-    }
+        spriteRenderer.material = originalMaterial;
 
-    // Fungsi untuk men-set objek menjadi invincible
-    public void SetInvincible(bool state)
-    {
-        isInvincible = state;
+        isInvincible = false;
     }
 }
