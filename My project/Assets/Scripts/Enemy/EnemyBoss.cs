@@ -13,7 +13,7 @@ public class EnemyBoss : Enemy
     private float direction = 1f; // Arah gerakan horizontal
     private float shootTimer; // Timer untuk interval tembakan
 
-    private void Awake()
+    public void Awake()
     {
         bulletPool = new ObjectPool<Bullet>(
             CreateBullet,

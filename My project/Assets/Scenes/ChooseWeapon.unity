@@ -141,7 +141,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &66497657
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1254,7 +1254,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75c2ed206c7093d43929bb5af14f9ce1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bullet: {fileID: 920373650998041261, guid: f86045e255b1d6b458bcb45d4087dde6, type: 3}
+  bullet: {fileID: 7403076398011350742, guid: f86045e255b1d6b458bcb45d4087dde6, type: 3}
   damage: 10
 --- !u!1 &619394800
 GameObject:
