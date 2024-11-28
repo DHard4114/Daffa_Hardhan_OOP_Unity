@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 6282107694201338596}
   - component: {fileID: 5787846833493659763}
   - component: {fileID: -1393483622443936704}
+  - component: {fileID: -6685515053792744013}
+  - component: {fileID: -7166860893983640270}
   m_Layer: 0
   m_Name: EnemyForward
   m_TagString: Enemy
@@ -82,7 +84,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 1235da68beacdf240bda77d16c79b185, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -127,9 +129,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   level: 0
-  enemyKilledEvent:
-    m_PersistentCalls:
-      m_Calls: []
+  enemySprite: {fileID: 0}
+  moveSpeed: 2
+  mainCamera: {fileID: 0}
+  spawner: {fileID: 0}
 --- !u!61 &-1393483622443936704
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -175,3 +178,32 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.41666666, y: 0.375}
   m_EdgeRadius: 0
+--- !u!114 &-6685515053792744013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1970456144110114248}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c42d2fd985e4b94ba02c16a59d59217, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: {fileID: 0}
+--- !u!114 &-7166860893983640270
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1970456144110114248}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e723d1fc0f9cb1d428e0ffec0b089f21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blinkingCount: 7
+  blinkInterval: 0.1
+  blinkMaterial: {fileID: 2100000, guid: 1235da68beacdf240bda77d16c79b185, type: 2}
+  isInvincible: 0

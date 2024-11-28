@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: -1887671079521774768}
   - component: {fileID: 1045799073350185366}
   - component: {fileID: 6200186904841755396}
+  - component: {fileID: 5500063822657808125}
   m_Layer: 0
   m_Name: EnemyHorizontal
   m_TagString: Enemy
@@ -85,7 +86,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 1235da68beacdf240bda77d16c79b185, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -130,9 +131,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   level: 0
-  enemyKilledEvent:
-    m_PersistentCalls:
-      m_Calls: []
+  enemySprite: {fileID: 0}
+  moveSpeed: 2
+  mainCamera: {fileID: 0}
+  spawner: {fileID: 0}
 --- !u!61 &5843661781379643067
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -218,3 +220,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bullet: {fileID: 0}
   damage: 0
+--- !u!114 &5500063822657808125
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6951723906316454348}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e723d1fc0f9cb1d428e0ffec0b089f21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blinkingCount: 7
+  blinkInterval: 0.1
+  blinkMaterial: {fileID: 2100000, guid: 1235da68beacdf240bda77d16c79b185, type: 2}
+  isInvincible: 0

@@ -82,7 +82,8 @@ public class Weapon : MonoBehaviour
     void Update()
     {
         timer += Time.deltaTime;
-        
+
+        // Menembakkan Bullet dalam interval waktu
         if (timer >= shootIntervalInSeconds)
         {
             Shoot();

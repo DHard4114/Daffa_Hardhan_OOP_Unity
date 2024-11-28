@@ -4,37 +4,39 @@ using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
-    [SerializeField] private Animator animator;
+    [SerializeField] Animator animator;
 
-    void Awake()
+    private IEnumerator LoadSceneAsync(string sceneName)
     {
         if (animator == null)
         {
-            Debug.LogWarning("Animator belum diassign pada LevelManager.");
+            Debug.LogWarning(this + "tidak memiliki Animator");
+            yield break;
         }
-    }
-    private IEnumerator LoadSceneAsync(string sceneName)
-    {
-        animator.SetTrigger("StartTransition");
-        yield return new WaitForSeconds(1);
 
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName);
-        while (!asyncLoad.isDone)
+        animator.SetTrigger("StartTransition");//Menjalankan animasi StartTransition
+
+        yield return new WaitForSeconds(1);//Menunggu satu detik agar animasi dapat selesai dijalankan
+
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName);//Mengganti scene
+
+        while (!asyncLoad.isDone)//Menunggu scene dimuat
         {
             yield return null;
         }
-
-        animator.SetTrigger("EndTransition");
-
-        GameObject player = GameObject.FindWithTag("Player");
-        if (player != null)
-        {
-            player.transform.position = new Vector3(0, -4.5f, 0);
-        }
+        
+        animator.SetTrigger("EndTransition");//Menjalankan animasi EndTransition
     }
 
+    /*
+    Method untuk menjalankan start coroutine
+    coroutine adalah method pada unity yang dapat dihentikan
+    dan dilanjutkan kembali prosesnya sehingga animasi dapat 
+    dijalankan terlebih dahulu dan melanjutkan animasi berikutnya
+    setelah berganti scene  
+    */
     public void LoadScene(string sceneName)
     {
-        StartCoroutine(LoadSceneAsync(sceneName));
+        StartCoroutine(LoadSceneAsync(sceneName));//Menjalankan start coroutine
     }
 }

@@ -1,14 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class HealthComponent : MonoBehaviour
 {
-    public int maxHealth = 10;
+    public int maxHealth;
+    private int health{ get; set;}
 
-    private int health;
-
-    void Awake()
+    void Start()
     {
         health = maxHealth;
     }
@@ -16,9 +13,10 @@ public class HealthComponent : MonoBehaviour
     public void Subtract(int amount)
     {
         health -= amount;
-
+        Debug.Log(this + " Getting hit by " + amount + " damage. remaining health : " + health);
         if (health <= 0)
         {
+            health = 0;
             Destroy(gameObject);
         }
     }

@@ -5,78 +5,41 @@ using UnityEngine;
 public class WeaponPickup : MonoBehaviour
 {
     [SerializeField] Weapon weaponHolder;
-    private Weapon weapon;
-    private static Weapon currentWeapon;
+    Weapon weapon;
 
-    void Awake()
-    {
-        if (weaponHolder != null)
-        {
-            weapon = Instantiate(weaponHolder);
-        }
-        else
-        {
-            Debug.LogWarning("Weapon Holder belum diassign di Inspector.");
-        }
-    }
-
-    void Start()
-    {
-        if (weapon != null)
-        {
-            TurnVisual(false);
-        }
-    }
-
+    //Method untuk mengaktifkan weapon ketika Player menyentuh Weapon Pickup
     void OnTriggerEnter2D(Collider2D other)
     {
-    
-        if (other.gameObject.CompareTag("Player"))
+        if (other.CompareTag("Player"))
         {
-            Debug.Log("Objek Player Memasuki trigger");
-            if (currentWeapon != null && currentWeapon != weapon)
+            Weapon existingWeapon = other.GetComponentInChildren<Weapon>();
+
+            if (existingWeapon != null)
             {
-                ReleaseCurrentWeapon();
+                TurnVisual(false, existingWeapon);
             }
-            currentWeapon = weapon;
-            weapon.transform.SetParent(other.transform);
-            weapon.transform.localPosition = Vector3.zero;
+
+            weapon = Instantiate(weaponHolder);//Memberikan weapon ke Player
+            weapon.transform.SetParent(other.transform);//Membuat weapon mengikuti pergerakan Player
+            weapon.transform.position = other.transform.position;//Menyamakan posisi weapon dan Player
             TurnVisual(true);
-            
-        }
-        else
-        {
-            Debug.Log("Bukan Objek Player yang memasuki Trigger");
         }
     }
 
-    void TurnVisual(bool on)
+    //Method untuk menonaktifkan Weapon Pickup
+    void TurnVisual(bool On)
     {
-        if (weapon != null)
-        {
-            weapon.gameObject.SetActive(on);
-        }
-        else
-        {
-            Debug.LogWarning("Weapon tidak ditemukan.");
-        }
+        gameObject.SetActive(!On);
+        weapon.gameObject.SetActive(On);
     }
 
-    void TurnVisual(bool on, Weapon specificWeapon)
+    //Method untuk menonaktifkan Weapon Pickup dan menghapus Weapon sebelumnya yang digunakan
+    void TurnVisual(bool On, Weapon weapon)
     {
-        if (specificWeapon != null)
+        weapon.weaponPickup.gameObject.SetActive(!On);
+        if (!On)
         {
-            specificWeapon.gameObject.SetActive(on);
+            Destroy(weapon.gameObject);
         }
-        else
-        {
-            Debug.LogWarning("Specific weapon tidak ditemukan.");
-        }
-    }
-    void ReleaseCurrentWeapon()
-    {
-        currentWeapon.transform.SetParent(null);
-        currentWeapon.gameObject.SetActive(false);
-        currentWeapon = null;
     }
 }

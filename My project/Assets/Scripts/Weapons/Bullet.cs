@@ -30,6 +30,7 @@ public class Bullet : MonoBehaviour
     void OnTriggerEnter2D(Collider2D collider)
     {
         // Menonaktifkan Bullet jika bertabrakan dengan object
+        Debug.Log("Bullet hit: " + collider.name);
         objectPool?.Release(this);
     }
 
@@ -38,4 +39,5 @@ public class Bullet : MonoBehaviour
         // Menonaktifkan Bullet jika Bullet keluar dari layar
         objectPool?.Release(this);
     }
+
 }

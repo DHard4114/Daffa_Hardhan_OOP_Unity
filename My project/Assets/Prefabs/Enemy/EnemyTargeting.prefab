@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 441884291605259791}
   - component: {fileID: -5808643121895958389}
   - component: {fileID: 2760095424408186437}
+  - component: {fileID: -5729242625232156654}
   m_Layer: 0
   m_Name: EnemyTargeting
   m_TagString: Enemy
@@ -85,7 +86,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 1235da68beacdf240bda77d16c79b185, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -130,9 +131,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   level: 0
-  enemyKilledEvent:
-    m_PersistentCalls:
-      m_Calls: []
+  enemySprite: {fileID: 0}
+  moveSpeed: 2
+  mainCamera: {fileID: 0}
+  spawner: {fileID: 0}
 --- !u!61 &4081173259753925369
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -218,3 +220,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bullet: {fileID: 0}
   damage: 10
+--- !u!114 &-5729242625232156654
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6078924659926584007}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e723d1fc0f9cb1d428e0ffec0b089f21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blinkingCount: 7
+  blinkInterval: 0.1
+  blinkMaterial: {fileID: 2100000, guid: 1235da68beacdf240bda77d16c79b185, type: 2}
+  isInvincible: 0
