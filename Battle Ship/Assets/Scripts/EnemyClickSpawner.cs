@@ -11,7 +11,7 @@ public class EnemyClickSpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-       Assert.IsTrue(enemyVariants.Length > 0, "Tambahkan setidaknya 1 Prefab Enemy terlebih dahulu!");
+        Assert.IsTrue(enemyVariants.Length > 0, "Tambahkan setidaknya 1 Prefab Enemy terlebih dahulu!");
 
 
     }

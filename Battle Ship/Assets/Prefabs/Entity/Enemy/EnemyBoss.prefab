@@ -80,7 +80,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 4198659915060808941, guid: de3dd9c429829724791cc2f8ee22305e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -180,11 +180,9 @@ MonoBehaviour:
   enemyKilledEvent:
     m_PersistentCalls:
       m_Calls: []
-  moveSpeed: 5
-  mainCamera: {fileID: 0}
-  bullet: {fileID: 3607453967875736057, guid: f9dc7992821de1146b400c885c648f4e, type: 3}
+  horizontalSpeed: 3
+  bulletPrefab: {fileID: 3607453967875736057, guid: f9dc7992821de1146b400c885c648f4e, type: 3}
   bulletSpawnPoint: {fileID: 2511603909788568528}
-  shootInterval: 2
 --- !u!114 &5841329854556849326
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -197,6 +195,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28b82048d25ea794eaaf23f139d1a7f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bullet: {fileID: 3607453967875736057, guid: f9dc7992821de1146b400c885c648f4e, type: 3}
   damage: 10
 --- !u!114 &2911060884589741097
 MonoBehaviour:
@@ -211,6 +210,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: {fileID: 7783387392744903330}
+  OnHitboxCollide:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &7783387392744903330
 MonoBehaviour:
   m_ObjectHideFlags: 0

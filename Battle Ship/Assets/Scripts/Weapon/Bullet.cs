@@ -21,7 +21,7 @@ public class Bullet : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
     }
 
-    void OnEnable()
+    public void OnEnable()
     {
         // Menggerakkan Bullet
         rb.velocity = transform.up * bulletSpeed;

@@ -1,27 +1,45 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(Collider2D))]
 public class HitboxComponent : MonoBehaviour
 {
-    public HealthComponent health;
-    InvisibilityComponent invisibilityComponent;
+    [SerializeField]
+    HealthComponent health;
+
+    Collider2D area;
+
+    private InvincibilityComponent invincibilityComponent;
+
+    public UnityEvent OnHitboxCollide;
+
 
     void Start()
     {
-        if (health == null)
+        area = GetComponent<Collider2D>();
+        invincibilityComponent = GetComponent<InvincibilityComponent>();
+        OnHitboxCollide = new UnityEvent();
+    }
+
+    public void Damage(Bullet bullet)
+    {
+        if (invincibilityComponent != null && invincibilityComponent.isInvincible) return;
+
+        if (health != null)
         {
-            health = GetComponent<HealthComponent>();
+            health.Subtract(bullet.damage);
+            OnHitboxCollide.Invoke();
         }
     }
 
-    public void Damage(int amount)
+    public void Damage(int damage)
     {
-        invisibilityComponent = GetComponent<InvisibilityComponent>();
-        if (!invisibilityComponent.isInvincible)
+        if (invincibilityComponent != null && invincibilityComponent.isInvincible) return;
+
+        if (health != null)
         {
-            health?.Subtract(amount);
-            invisibilityComponent.Flash();
+            health.Subtract(damage);
+            OnHitboxCollide.Invoke();
         }
-        
     }
 }

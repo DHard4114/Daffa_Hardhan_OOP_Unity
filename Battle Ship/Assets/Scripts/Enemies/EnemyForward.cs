@@ -1,33 +1,57 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyForwardMovement : Enemy
+public class EnemyForward : Enemy
 {
-    [SerializeField] private float moveSpeed = 5f;
-    [SerializeField] Camera mainCamera;
-    Vector3 spawnPosition;
+    // Kecepatan gerakan musuh
+    private float speed = 2f;
+    
+    // Batas atas dan bawah layar
+    private float topBoundary, bottomBoundary;
+    
+    // Arah gerakan musuh (1 untuk ke bawah, -1 untuk ke atas)
+    private float moveDirection;
 
-    private void Awake()
+    // Fungsi Start dipanggil sekali saat permainan dimulai
+    void Start()
     {
-        // Menentukan posisi spawn
-        if (mainCamera != null)
-        {
-            float spawnX = Random.Range(0, Screen.width);
-            spawnPosition = mainCamera.ScreenToWorldPoint(new Vector3(spawnX, Screen.height, mainCamera.transform.position.z));
-            transform.position = new Vector3(spawnPosition.x, spawnPosition.y, 0);
-        }
-        else
-        {
-            Debug.LogError(this + " tidak menemukan MainCamera");
-        }
+        // Mengatur batas atas layar menggunakan ViewportToWorldPoint (dikurangi 1 untuk margin)
+        topBoundary = Camera.main.ViewportToWorldPoint(new Vector3(0, 1, 0)).y - 1f;
+        
+        // Mengatur batas bawah layar menggunakan ViewportToWorldPoint (ditambah 1 untuk margin)
+        bottomBoundary = Camera.main.ViewportToWorldPoint(Vector3.zero).y + 1f;
+        
+        // Mengatur batas kiri layar dengan margin
+        float leftBoundary = Camera.main.ViewportToWorldPoint(Vector3.zero).x + 1f;
+        
+        // Mengatur batas kanan layar dengan margin
+        float rightBoundary = Camera.main.ViewportToWorldPoint(new Vector3(1, 0, 0)).x - 1f;
+        
+        // Menentukan posisi spawn X secara acak antara batas kiri dan kanan layar
+        float spawnX = Random.Range(leftBoundary, rightBoundary);
+
+        // Menentukan posisi spawn musuh di batas atas atau bawah layar secara acak
+        transform.position = new Vector3(
+            spawnX, // Posisi X di antara batas kiri dan kanan
+            Random.value < 0.5f ? topBoundary : bottomBoundary, // Posisi Y di batas atas atau bawah
+            transform.position.z // Menjaga posisi Z tetap sama
+        );
+
+        // Menentukan arah gerakan berdasarkan posisi spawn Y; jika di atas, bergerak ke bawah, dan sebaliknya
+        moveDirection = transform.position.y > 0 ? -1f : 1f;
     }
 
-    private void Update()
+    // Fungsi Update dipanggil setiap frame
+    void Update()
     {
-        transform.Translate(moveSpeed * Time.deltaTime * Vector2.up);
-    }
-
-    void OnBecameInvisible()
-    {
-        transform.position = new Vector3(spawnPosition.x, spawnPosition.y, 0);
+        // Menggerakkan musuh ke atas atau ke bawah berdasarkan kecepatan dan arah gerakan
+        transform.Translate(Vector3.up * speed * moveDirection * Time.deltaTime);
+        
+        // Jika musuh mencapai batas atas atau bawah, balik arah gerakan
+        if (transform.position.y <= bottomBoundary || transform.position.y >= topBoundary)
+        {
+            moveDirection *= -1; // Mengganti arah gerakan
+        }
     }
 }

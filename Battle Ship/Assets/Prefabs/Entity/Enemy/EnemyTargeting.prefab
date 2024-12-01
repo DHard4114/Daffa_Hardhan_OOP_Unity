@@ -13,10 +13,10 @@ GameObject:
   - component: {fileID: 7123556292391006094}
   - component: {fileID: 2630671814442400561}
   - component: {fileID: 8195293886112797560}
-  - component: {fileID: 6568836508462197607}
   - component: {fileID: 9211303874151241792}
   - component: {fileID: 8817289874007136467}
   - component: {fileID: 8541061158996522926}
+  - component: {fileID: 4293485543526071526}
   m_Layer: 0
   m_Name: EnemyTargeting
   m_TagString: Enemy
@@ -181,19 +181,6 @@ MonoBehaviour:
       m_Calls: []
   moveSpeed: 2
   mainCamera: {fileID: 0}
---- !u!114 &6568836508462197607
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4314850754712650383}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 28b82048d25ea794eaaf23f139d1a7f4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 1
 --- !u!114 &9211303874151241792
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -236,3 +223,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: {fileID: 9211303874151241792}
+  OnHitboxCollide:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &4293485543526071526
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4314850754712650383}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28b82048d25ea794eaaf23f139d1a7f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bullet: {fileID: 3607453967875736057, guid: f9dc7992821de1146b400c885c648f4e, type: 3}
+  damage: 0
